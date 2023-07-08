@@ -1,0 +1,15 @@
+span {
+    color: blue;
+}
+
+.status-completed {
+    color: green;
+}
+
+.status-time-expired {
+    color: red;
+}
+
+.btn-primary {
+    margin-top: 10px;
+}
