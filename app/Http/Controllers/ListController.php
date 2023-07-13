@@ -73,11 +73,11 @@ class ListController extends Controller
         $list = DoList::findOrFail($id);
         $list->delete();
 
-        return redirect()->back()->with('success', 'Задача успешно удалена!');
+        return redirect()->route('task')->with('success', 'Задача успешно удалена!');
     }
     public function descr($id)
     {
-        $list=DoList::find($id);
+        $list=DoList::findOrFail($id);
         return view('descr', ['list' => $list]);
     }
 }
