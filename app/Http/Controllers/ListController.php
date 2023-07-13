@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\DoList;
 use Carbon\Carbon;
+
 class ListController extends Controller
 {
     public function list()
@@ -17,6 +18,7 @@ class ListController extends Controller
         } else {
             return redirect()->route('login');
         }
+
     }
     public function task()
     {
@@ -39,39 +41,43 @@ class ListController extends Controller
 
 
 
-            $status = 'В процессе';
+        $status = 'В процессе';
 
         DoList::create([
 
             'name' => $validatedData['name'],
             'time' => $validatedData['time'],
-            'id_user'=>$request->user()->id,
-            'status'=>$status,
+            'id_user' => $request->user()->id,
+            'status' => $status,
         ]);
 
 
 
         return redirect()->back()->with('success', 'Вы успешно добавили задачу!');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'status' => 'required|string|max:255',
+        ]);
+
+        $list = DoList::findOrFail($id);
+        $list->status = $validatedData['status'];
+        $list->save();
+
+        return redirect()->back()->with('success', 'Статус обновлен!');
+    }
+    public function destroy($id)
+    {
+        $list = DoList::findOrFail($id);
+        $list->delete();
+
+        return redirect()->back()->with('success', 'Задача успешно удалена!');
+    }
+    public function descr($id)
+    {
+        $list=DoList::find($id);
+        return view('descr', ['list' => $list]);
+    }
 }
-
-public function update(Request $request, $id)
-{
-    $validatedData = $request->validate([
-        'status' => 'required|string|max:255',
-    ]);
-
-    $list = DoList::findOrFail($id);
-    $list->status = $validatedData['status'];
-    $list->save();
-
-    return redirect()->back()->with('success', 'Статус обновлен!');
-}
-public function destroy($id)
-{
-    $list = DoList::findOrFail($id);
-    $list->delete();
-
-    return redirect()->back()->with('success', 'Задача успешно удалена!');
-}
-}
-
