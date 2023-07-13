@@ -93,7 +93,7 @@
                                     <form action="{{ route('list.destroy', $list->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <Button type="submit">Удалить</Button>
+                                        <button type="submit">Удалить</button>
                                     </form>
                                 </th>
                             </tr>
