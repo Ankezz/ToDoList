@@ -70,7 +70,7 @@
                     <tbody>
                         @foreach ($lists as $list)
                             <tr>
-                                <th scope="row">{{ $list->name }}</th>
+                                <th scope="row"><a href="  {{route('descr', $list->id) }}  ">{{ $list->name }} </a></th>
                                 <th>{{ $list->time }}</th>
                                 <th>
                                 @if ($list->status === 'В процессе')
