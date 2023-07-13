@@ -19,6 +19,8 @@ Route::middleware('auth')->group(function() {
     Route::post('/list', [ListController::class, 'store'])->name('list.store');
     Route::put('/list/{id}', [ListController::class, 'update'])->name('list.update');
     Route::delete('/list/{id}', [ListController::class, 'destroy'])->name('list.destroy');
+
+    Route::get('/descr{id}',[ListController::class, 'descr'])->name('descr');
 });
 
 
